@@ -1,0 +1,33 @@
+.dayForecast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  transition: all 300ms;
+  overflow: hidden;
+  object-fit: cover;
+  color: black;
+  cursor: pointer;
+  padding: 20px;
+
+  .headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .radioButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+}
