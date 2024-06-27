@@ -45,24 +45,22 @@ const Home = () => {
   // Format the date using toLocaleDateString
   const formattedDate = date.toLocaleDateString('en-US', options);
 
-  console.log(formattedDate);
+  console.log(weather.list);
 
   return (
-    <Container>
+    <section>
       <DayForecast />
       <br></br>
       <Grid
-        container
+        section
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {Array.from(Array(4)).map((_, index) => (
-          <Grid xs={2} sm={8} md={6} key={index}>
-            <Card />
-          </Grid>
+        {weather.list?.map((day) => (
+          <Card day={day} key={day.dt} />
         ))}
       </Grid>
-    </Container>
+    </section>
   );
 };
 

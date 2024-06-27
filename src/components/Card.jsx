@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Cloud } from '@mui/icons-material';
 
-const Card = ({ item }) => {
+const Card = ({ day }) => {
   // const playSound = useContext(AppContext);
   // cloud thermostat thunderstorm wb_sunny
   // <img
@@ -18,16 +18,20 @@ const Card = ({ item }) => {
       {/* <Link to={`/cocktails/${item.idDrink}`} onClick={playSound}> */}
       <Link>
         <div className='leftText'>
-          <h2>Tuesday</h2>
+          <h3>{day.dt_txt}</h3>
           {/* <br /> */}
-          <h2 className='degreeHeader'>27°C</h2>
-          <p>24°C/29°C</p>
+          <h2 className='degreeHeader'>{day.main.temp}</h2>
+          <p>
+            {day.main.temp_max}°C/{day.main.temp_min}°C
+          </p>
         </div>
 
         <div className='rightText'>
           <div className='wrapper'>
-            <Cloud />
-            <p>Cloudy</p>
+            <i
+              className={`owf owf-${day.weather[0].id}-${day.sys.pod} owf-2x`}
+            ></i>
+            <p>{day.weather[0].description}</p>
           </div>
           <br />
           <h2>15:00</h2>
