@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Card from '../../components/Card';
 import { Container, Grid } from '@mui/joy';
 import DayForecast from '../day-forecast/DayForecast';
+import getAverageDailyForecast from '../../utils/getAverageDailyForecast';
+import getAllDayForecast from '../../utils/getAllDayForecast';
+import { AppContext } from '../../App';
 
 const Home = () => {
   const [weather, setWeather] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  // display weather for today for user location via Api
-  // display 4 cards for days after today via Api
+  const { setDate } = useContext(AppContext);
   // Celsius units=metric default option
   // Fahrenheit use units=imperial option
 
@@ -29,35 +33,48 @@ const Home = () => {
         setWeather(data);
       })
       .catch((error) => {
-        console.log('Request failed:', error);
-      });
+        setError(error);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
-  const date = new Date(1719360000 * 1000);
+  if (isLoading) {
+    return;
+  }
 
-  // Options for date formatting
-  const options = {
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-  };
+  if (error) {
+    return console.log('Request failed:', error);
+  }
 
-  // Format the date using toLocaleDateString
-  const formattedDate = date.toLocaleDateString('en-US', options);
+  // const today = new Date().toISOString().split('T')[0];
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const day = String(today.getDate()).padStart(2, '0');
 
+  const localDate = `${year}-${month}-${day}`;
+  setDate(localDate);
+
+  const averageDaysForecast = getAverageDailyForecast(weather.list);
+
+  console.log(today);
   console.log(weather.list);
 
   return (
     <section>
-      <DayForecast />
+      <DayForecast
+        today={today}
+        city={weather.city.name}
+        weatherList={weather.list}
+      />
       <br></br>
       <Grid
         section
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {weather.list?.map((day) => (
-          <Card day={day} key={day.dt} />
+        {averageDaysForecast.map((day, index) => (
+          <Card day={day} key={index} />
         ))}
       </Grid>
     </section>
