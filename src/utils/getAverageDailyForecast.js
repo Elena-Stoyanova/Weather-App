@@ -77,7 +77,7 @@ const getAverageDailyForecast = (list) => {
     }
   });
 
-  return formattedData;
+  return formattedData.slice(0, 4);
 };
 
 export default getAverageDailyForecast;

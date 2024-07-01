@@ -1,12 +1,17 @@
-@import '../Mixins.scss';
+@import '../../Mixins.scss';
 
 .card {
+  width: 250px;
   border-radius: 8px;
   margin-top: 10px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   transition: all 300ms;
   overflow: hidden;
   object-fit: cover;
+  background: rgba(255, 255, 255, 0.315);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   &:hover {
     transform: scale(1.05);
@@ -21,6 +26,10 @@
     cursor: pointer;
     padding: 20px;
     background-color: transparent;
+
+    &:hover {
+      color: rgb(0, 31, 88);
+    }
   }
 
   .degreeHeader {
