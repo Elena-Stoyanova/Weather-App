@@ -1,13 +1,13 @@
 # Weather App
 
 ### Built with
-React
-JavaScript
-Sass
-Material UI icons
-React Router
-owfont - symbol font for Open Weather Map API
-OpenWeatherMap API
+- React
+- JavaScript
+- Sass
+- Material UI icons
+- React Router
+- owfont - symbol font for Open Weather Map API
+- OpenWeatherMap API
 
 ### Run Locally
 
